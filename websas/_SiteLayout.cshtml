@@ -1,63 +1,35 @@
 ﻿<!DOCTYPE html>
 <html lang="zh">
-    <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta charset="utf-8" />
-        <title>@Page.Title - 我的 ASP.NET 网页</title>
-        <link href="~/Content/themes/base/jquery.ui.all.css" rel="stylesheet" type="text/css" />
-        <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-        <script src="~/Scripts/jquery-ui-1.10.3.js"></script>
-        <script src="~/Scripts/modernizr-2.6.2.js"></script>
-        <meta name="viewport" content="width=device-width" />
-    </head>
-    <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title"><a href="~/">将你的徽标放置在此处</a></p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @if (WebSecurity.IsAuthenticated) {
-                            <text>
-                                Hello, <a class="email" href="~/Account/Manage" title="Manage">@WebSecurity.CurrentUserName</a>!
-                                <form id="logoutForm" action="~/Account/Logout" method="post">
-                                    @AntiForgery.GetHtml()
-                                    <a href="javascript:document.getElementById('logoutForm').submit()">注销</a>
-                                </form>
-                            </text>
-                        } else {
-                            <ul>
-                                <li><a href="~/Account/Register">注册</a></li>
-                                <li><a href="~/Account/Login">登录</a></li>
-                            </ul>
-                        }
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li><a href="~/">主页</a></li>
-                            <li><a href="~/About">关于</a></li>
-                            <li><a href="~/Contact">联系方式</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@Page.Title - 督导听课系统</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/sas.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/tabs.css">
+    <!--[if IE]>
+        <script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js">
+        </script>
+        <![endif]-->
+</head>
+
+<body background="~/image/10.jpg">
+    <div id="container">
+
+        @RenderBody()
+        <div id="footer">
+            <span class="foot-white">
+                CopyRight &copy; @DateTime.Now.Year - 破晓技术团队
+            </span>
         </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 网页</p>
-                </div>
-            </div>
-        </footer>
-        @RenderSection("Scripts", required: false)
-    </body>
+    </div>
+
+    <!--container-->
+
+    @RenderSection("Scripts", required: false)
+</body>
 </html>

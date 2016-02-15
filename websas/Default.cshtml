@@ -1,46 +1,79 @@
 ﻿@{
     Layout = "~/_SiteLayout.cshtml";
-    Page.Title = "Home Page";
+    Page.Title = "主页";
+    if (!WebSecurity.IsAuthenticated)
+    {
+        Response.Redirect("~/Account/Login", true);
+    }
 }
 
-@section featured {
-<section class="featured">
-    <div class="content-wrapper">
-        <hgroup class="title">
-            <h1>@Page.Title.</h1>
-            <h2>Modify this template to jump-start your ASP.NET Web Pages application.</h2>
-        </hgroup>
-        <p>
-            To learn more about ASP.NET Web Pages, visit
-            <a href="http://asp.net/webpages" title="ASP.NET Web Pages Website">http://asp.net/webpages</a>.
-            The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET Web Pages.
-            If you have any questions about ASP.NET Web Pages, visit
-            <a href="http://forums.iis.net/1166.aspx" title="ASP.NET Web Pages Forum">our forums</a>.
-        </p>
+@section Scripts {
+    <script src="~/js/jquery.min.js">
+    </script>
+    <script src="~/js/bootstrap.min.js">
+    </script>
+    <script src="~/js/tabs.js">
+    </script>
+    <script src="~/js/materialMenu.js">
+    </script>
+    <script src="~/js/navpage.js">
+    </script>
+    <script>
+        var act = window.location.hash;
+        if (act.substring(0, 3) == "#!/") {
+            showpage(act.substring(2));
+        } else {
+            showpage("/Power/Confirm");
+        }
+        var menu = new Menu;
+    </script>
+}
+
+<div class="header">
+    <span class=" dd-title-center dd-title-white" id="title1">
+        督导听课系统
+    </span>
+
+    @if (WebSecurity.IsAuthenticated)
+    {
+        
+        <span class="dd-title-blue">
+            <span id="title2">
+            </span>
+            <a href="~/Account/Manage" class="admin admin-text" title="Manage">
+                管理员  @WebSecurity.CurrentUserName
+            </a>
+            @*
+        <form id="logoutForm" action="~/Account/Logout" method="post">
+            @AntiForgery.GetHtml()
+            <a href="javascript:document.getElementById('logoutForm').submit()">注销</a>
+        </form>
+            *@
+            <img src="image/14.png" class="admin admin-1" id="image">
+
+        </span>
+    }
+    @*else {
+            <ul>
+                <li><a href="~/Account/Register">注册</a></li>
+                <li><a href="~/Account/Login">登录</a></li>
+            </ul>
+        }*@
+
+</div>
+
+<div id="page">
+
+
+
+    <div class="container-fluid">
+        <div id="wrapper" class="wrapper">
+
+
+
+
+        </div>
+        @RenderPage("~/Shared/_Menu.cshtml")
     </div>
-</section>
-}
 
-<h3>We suggest the following:</h3>
-
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET Web Pages and the new Razor syntax provide a fast, approachable, and lightweight way to combine server code with HTML
-        to create dynamic web content. Connect to databases, add video, link to social networking sites, and include many more features
-        that let you create beautiful sites using the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245139">Learn more…</a>
-    </li>
-
-    <li class="two">
-        <h5>Add NuGet packages and jump start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245140">Learn more…</a>
-    </li>
-
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245143">Learn more…</a>
-    </li>
-</ol>
+</div>
