@@ -15,4 +15,5 @@
 
 # Customize
 /websas/App_Data/*
-!/websas/App_Data/.gitkeep
+!/websas/App_Data/*.default.*
+/websas/Web.config
